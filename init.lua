@@ -144,7 +144,7 @@ vim.o.splitbelow = true
 -- Custom options
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
-vim.o.wrap = false
+vim.o.wrap = true
 vim.o.termguicolors = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
