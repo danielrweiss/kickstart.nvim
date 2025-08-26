@@ -6,8 +6,8 @@ local state = {
 }
 local function open_floating_term(opts)
   opts = opts or {}
-  local width = math.floor(vim.o.columns * 0.5)
-  local height = math.floor(vim.o.lines * 0.5)
+  local width = math.floor(vim.o.columns * 0.6)
+  local height = math.floor(vim.o.lines * 0.75)
   local col = math.floor((vim.o.columns - width) / 2)
   local row = math.floor((vim.o.lines - height) / 2)
 
@@ -31,8 +31,6 @@ local function open_floating_term(opts)
   }
 
   local win = vim.api.nvim_open_win(buf, true, win_config)
-  vim.cmd.terminal()
-  vim.cmd.startinsert()
   return { buf = buf, win = win }
 end
 
@@ -41,11 +39,11 @@ local toggle_terminal = function()
     state.floating = open_floating_term { buf = state.floating.buf }
     if vim.bo[state.floating.buf].buftype ~= 'terminal' then
       vim.cmd.terminal()
-      vim.cmd.startinsert()
     end
   else
     vim.api.nvim_win_hide(state.floating.win)
   end
+  vim.cmd.startinsert()
 end
 
 vim.api.nvim_create_user_command('FloatTerm', toggle_terminal, {})
